@@ -35,23 +35,35 @@ namespace Puissance4
 
         // Etape 3
         // Remplir la colonne jouée et changer de joueur
-        public int PlayerNumber => 1;
+        public int PlayerNumber = 1;
 
         
         public void Play(int column)
         {
-            for(int i = 0; i < 6; i++){
+            for(int i = 0; i < Tableau.GetLength(1) ; i++){
 
                 try{
                      if (Tableau[column,i+1] != 'x' && Tableau[column,i+1] != 'o'){
                     continue;
-                }
-                else{
+                    }
+                if(PlayerNumber == 1){
                     Tableau[column,i] = 'x';
+                    PlayerNumber = 2;
+                }
+                else if (PlayerNumber == 2){
+                    Tableau[column,i] = 'o';
+                    PlayerNumber = 1;
                 }
 
                 }catch(System.IndexOutOfRangeException){
-                   Tableau[column,i] = 'x';
+                   if(PlayerNumber == 1){
+                        Tableau[column,i] = 'x';
+                        PlayerNumber = 2;
+                    }
+                    else if (PlayerNumber == 2){
+                        Tableau[column,i] = 'o';
+                        PlayerNumber = 1;
+                    }
                 }
             }
         }
@@ -61,29 +73,6 @@ namespace Puissance4
         public int Winner => 0;
 
         public bool Ended => false;
-
-        public bool testFin(){
-            for(int i = 0; i < 6 ; i++)
-            {
-                for(int j = 0; j < 7 ; j++)
-                {
-                   int compteur = 0;
-                    while (compteur != 4){
-                        try{
-                             if(Tableau[i,j] == 'x'){
-                                 compteur ++;
-                             }
-                        }catch(System.IndexOutOfRangeException){
-                        continue;
-                }
-
-                        
-                    }
-                }
-                
-            }  
-            return false;
-        }
-        
+       
     }
 }
