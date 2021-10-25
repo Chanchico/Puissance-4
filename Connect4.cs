@@ -46,7 +46,8 @@ namespace Puissance4
                      if (Tableau[column,i+1] != 'x' && Tableau[column,i+1] != 'o'){
                     continue;
                     }
-                if(PlayerNumber == 1){
+                if( Tableau[column, i] == ' ' || Tableau[column,i+1] != ' '  ) {
+                     if(PlayerNumber == 1){
                     Tableau[column,i] = 'x';
                     PlayerNumber = 2;
                 }
@@ -54,7 +55,9 @@ namespace Puissance4
                     Tableau[column,i] = 'o';
                     PlayerNumber = 1;
                 }
-
+                }                                               
+                
+               
                 }catch(System.IndexOutOfRangeException){
                    if(PlayerNumber == 1){
                         Tableau[column,i] = 'x';
